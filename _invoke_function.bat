@@ -1,1 +1,1 @@
-serverless invoke -f hello -l
+serverless invoke --function contact --path mock_data.json

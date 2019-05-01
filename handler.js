@@ -1,14 +1,31 @@
 'use strict';
 
-module.exports.hello = async (event) => {
-  return {
+module.exports.contact = (event, context, callback) => {
+  let dynamicHtml = '<p>Hey Unknown!</p>';
+  // check for GET params and use if available
+  if (event.queryStringParameters && event.queryStringParameters.name) {
+    dynamicHtml = `<p>Hey ${event.queryStringParameters.name}!</p>`;
+  }
+
+  const html = `
+  <html>
+    <style>
+      h1 { color: #73757d; }
+    </style>
+    <body>
+      <h1>Landing Page</h1>
+      ${dynamicHtml}
+    </body>
+  </html>`;
+
+  const response = {
     statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }, null, 2),
+    headers: {
+      'Content-Type': 'text/html',
+    },
+    body: html,
   };
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+  // callback is sending HTML back
+  callback(null, response);
 };
