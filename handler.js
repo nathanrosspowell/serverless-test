@@ -1,5 +1,7 @@
 'use strict';
 
+var qs = require('qs')
+
 module.exports.homepage = (event, context, callback) => {
   let dynamicHtml = '<p>Hey Unknown!</p>';
   // check for GET params and use if available
@@ -34,7 +36,7 @@ module.exports.contact = (event, context, callback) => {
 
   console.log('Received event:', JSON.stringify(event, null, 2));
 
-  var data = event.queryStringParameters;
+  var data = qs.parse(event.body);
 
   if (data.a === undefined || data.b === undefined || data.op === undefined) {
       const response = {
