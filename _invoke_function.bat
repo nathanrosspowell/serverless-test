@@ -1,1 +1,1 @@
-serverless invoke --function contact --path mock_data.json
+serverless invoke --function homepage --path mock_data.json

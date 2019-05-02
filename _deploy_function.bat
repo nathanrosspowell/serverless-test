@@ -1,1 +1,1 @@
-serverless deploy function -f contact
+serverless deploy function -f homepage
